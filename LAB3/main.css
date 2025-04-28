@@ -1,0 +1,215 @@
+@media all {
+
+    html {
+        max-width: 1020px;
+    }
+    #std { 
+        width: 1020px;
+        height: 2px;
+        background-color: black;
+    }
+
+    header {
+        position: relative;
+        animation-name: example;
+        animation-duration: 2s;
+    }
+      
+    @keyframes example {
+        0%   {left:100%; top:0%;}
+        100% {left: 0%; top:0%;}
+    }
+
+    .flex-container > div > a {
+        color: black;
+        margin: 10px;
+        text-align: center;
+        text-decoration: none;
+    }
+    
+    #selected {
+        border-top: 2px solid red;
+        border-bottom: 2px solid red;
+
+    }
+
+    .flex-container-main {
+        align-items: center;
+    }
+
+    h2 {
+        margin: 0;
+    }
+    .flex-container-main > * {
+        margin: 0;
+    }
+
+    hr {
+        border-width: 0;
+        height: 1px;
+        width: 100%;
+        background-color: black;
+    }
+
+
+    .ho {
+        display: inline-block; 
+        transition: transform 2s ease;
+    }
+    
+    .ho > span {
+        position: absolute;   
+        top: 50%;              
+        left: 50%; 
+        transform: translate(-50%, -50%);            
+        display: none;
+        color: rgb(225, 0, 255);
+        
+    }
+    
+    .ho:hover {
+        transform: scale(2); 
+    }
+    
+    .ho:hover > span {
+        display: block;
+    }
+    
+    .image-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+
+
+}
+
+@media screen and (max-width:480px) {
+    .flex-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: start;
+        align-items: center;     
+    }
+
+    .flex-container-title-content{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: start;
+        align-items: center; 
+    }
+
+    .horizontal-image-outer {
+        display: flex;
+        flex-direction: column;
+      }
+    
+    .horizontal-image-inner {
+        flex-direction: row;
+        flex: 1;
+        min-height: 400px;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        border: 1px solid black;
+    }
+
+    img {
+        width: 40px;
+        height: auto;
+        margin-left: 5px;
+        margin-top: 5px;
+    }
+
+}
+
+@media screen and (min-width: 481px) and (max-width: 800px) {
+    .flex-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: start;
+        align-items: center;     
+    }
+
+    .flex-container-title-content{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: start;
+        align-items: center; 
+    }
+
+    .horizontal-image-outer {
+        display: flex;
+        flex-wrap: wrap;
+
+    }
+    
+    .horizontal-image-inner {
+        flex: 1;
+        min-width: 240px;
+        height: 300px;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        border: 1px solid black;
+    }
+
+    img {
+        width: 60px;
+        height: auto;
+        margin-left: 5px;
+        margin-top: 5px;
+    }
+
+}
+
+@media screen and (min-width:801px) {
+    
+    .flex-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: start;
+    }
+
+    .flex-container-title-content{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: start;
+    }
+
+    .multicolumn {
+        column-count: 2;
+        column-rule: 1px outset black;
+    }
+
+    .horizontal-image-outer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        min-height: 400px;
+    }
+
+    .horizontal-image-inner {
+        flex: 1;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        border: 1px solid black;
+    }
+    img {
+        width: 70px;
+        height: auto;
+        margin-left: 5px;
+        margin-top: 5px;
+    }
+}
+
+
