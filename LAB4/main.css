@@ -1,0 +1,217 @@
+
+@media all {
+
+    html {
+        max-width: 1020px;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    #std { 
+        width: 1020px;
+        height: 2px;
+        background-color: black;
+        margin: 0 auto;
+    }
+
+    .container {
+        width: 1020px;
+        margin: 0 auto;
+    }
+
+    header {
+        position: relative;
+        animation-name: example;
+        animation-duration: 2s;
+        text-align: center;
+    }
+
+    @keyframes example {
+        0%   {left:100%; top:0%;}
+        100% {left: 0%; top:0%;}
+    }
+
+    nav {
+        width: 100%;
+        background-color: #f0f0f0;
+        border-bottom: 1px solid #ccc;
+        margin-top: 12px;
+    }
+
+    .flex-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0;
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+
+    .flex-container > div > a {
+        color: black;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+    .flex-container > div > a:hover {
+        background-color: #ddd;
+    }
+
+    #selected {
+        border-top: 2px solid red;
+        border-bottom: 2px solid red;
+    }
+
+    hr {
+        border-width: 0;
+        height: 1px;
+        width: 100%;
+        background-color: black;
+    }
+
+    h2 {
+        margin: 0;
+    }
+
+    .movie-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
+        padding: 20px 0;
+    }
+
+    .movie-card {
+        background-color: white;
+        width: 220px;
+        padding: 16px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .movie-card img {
+        width: 100%;
+        height: auto;
+        border-radius: 6px;
+    }
+
+    .movie-card p {
+        font-size: 14px;
+        margin: 4px 0;
+    }
+
+    .movie-card .price {
+        font-weight: bold;
+        color: #e91e63;
+    }
+    .overview {
+        display: none;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        background-color: rgba(0, 0, 0, 0.85);
+        color: white;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 14px;
+        z-index: 2;
+      }
+      
+      .movie-card:hover .overview {
+        display: block;
+      }
+      
+
+    .green_button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .red_button {
+        background-color: #f44336;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .input {
+        padding: 8px;
+        width: 60%;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .form_wrap {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .row {
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+    }
+
+    .title_content {
+        width: 100px;
+        text-align: right;
+        margin-right: 10px;
+    }
+
+}
+
+/* Responsive styles */
+@media screen and (max-width:480px) {
+    .flex-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .flex-container-title-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .movie-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .movie-card {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 800px) {
+    .flex-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .movie-card {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width:801px) {
+    .flex-container {
+        flex-direction: row;
+        justify-content: center;
+    }
+}

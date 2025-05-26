@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="main.css">
+    </head>
+    <body>
+        <!--전체 컴포넌트들은 1020px 안에 있어야 함, 기준선 있으면 좋을듯-->
+        <div id="std"></div>
+
+        <!--h1 + animation--> 
+        <header><h1>인프밍 영화 정보 사이트입니다.</h1></header>
+
+        <!--nav-->
+        <nav>
+            <div class="flex-container">
+                <div><a href="index.html">메인페이지</a></div>
+                <div><a id="selected" href="login.html">로그인</a></div>
+                <div><a href="signup.html">회원가입</a></div>
+            </div>
+        </nav>
+
+        <br>
+
+        <!--to login--> <!--to signup-->
+        <!--구분선-->
+        <hr>
+        
+        <br>
+        <div class = 'form_wrap'>
+            <form  method = "post">
+                <!--아이디-->
+                <div class = 'row'>
+                    <span class="title_content">아이디 : </span>
+                    <input class="input" type="text" name="id" placeholder="아이디 입력" autocomplete="on" autofocus required>
+                </div>
+
+                <!--비밀번호-->
+                <div class = 'row'>
+                    <span class="title_content">비밀번호 : </span>
+                    <input class="input" type="password" name="pw" placeholder="비밀번호 입력" autocomplete="off" autofocus required>
+                </div>
+
+                <br>
+
+                <!--buttons-->
+                <div class = 'row'>
+                    <button class="green_button" type="submit" value="submit">Login</button>
+                    <button class="red_button" type="reset" value="Reset">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
