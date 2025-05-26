@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>메인페이지</title>
+    <link rel="stylesheet" type="text/css" href="main.css" />
+  </head>
+  <body>
+    <!-- 기준선 -->
+    <div id="std"></div>
+
+    <!-- 전체 컨테이너 -->
+    <div class="container">
+      <!-- 헤더 -->
+      <header><h1>인프밍 영화 정보 사이트입니다.</h1></header>
+
+      <!-- 네비게이션 바 -->
+      <nav>
+        <div class="flex-container">
+          <div><a id="selected" href="index.html">메인페이지</a></div>
+          <div><a href="login.html">로그인</a></div>
+          <div><a href="signup.html">회원가입</a></div>
+        </div>
+      </nav>
+
+      <hr />
+
+      <!-- 영화 목록 -->
+      <div id="movie-list" class="movie-container"></div>
+    </div>
+
+    <!-- JavaScript: Infinite Scroll -->
+    <script>
+      let movieData = [];
+      let currentIndex = 0;
+      const moviesPerLoad = 6;
+      let isLoading = false;
+
+      async function loadData() {
+        try {
+          const res = await fetch("product.json");
+          const data = await res.json();
+          movieData = data.movies;
+          loadMoreMovies();
+        } catch (err) {
+          console.error("데이터를 불러오는 데 실패했습니다:", err);
+        }
+      }
+
+      function loadMoreMovies() {
+        if (isLoading || currentIndex >= movieData.length) return;
+        isLoading = true;
+
+        const container = document.getElementById("movie-list");
+        const nextMovies = movieData.slice(currentIndex, currentIndex + moviesPerLoad);
+
+        nextMovies.forEach((movie) => {
+          const card = document.createElement("div");
+          card.className = "movie-card";
+          card.innerHTML = `
+            <img src="${movie.image}" alt="${movie.title}" />
+            <h2>${movie.title}</h2>
+            <p><strong>개봉일:</strong> ${movie.release_date}</p>
+            <p><strong>평점:</strong> ${movie.vote_average}</p>
+          `;
+          container.appendChild(card);
+        });
+
+        currentIndex += moviesPerLoad;
+        isLoading = false;
+      }
+
+      window.addEventListener("scroll", () => {
+        if (
+          window.innerHeight + window.scrollY >= document.body.offsetHeight - 100
+        ) {
+          loadMoreMovies();
+        }
+      });
+
+      window.onload = loadData;
+    </script>
+  </body>
+</html>
