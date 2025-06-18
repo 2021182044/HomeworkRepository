@@ -1,0 +1,274 @@
+@media all {
+    html {
+      max-width: 1020px;
+      margin: 0 auto; /* html 태그 자체를 중앙 정렬 */
+    }
+  
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+  
+    #std {
+      width: 1020px;
+      height: 2px;
+      background-color: black;
+      margin: 0 auto;
+    }
+  
+    .container {
+      width: 1020px;
+      margin: 0 auto;
+    }
+  
+    header {
+      position: relative;
+      animation-name: example;
+      animation-duration: 2s;
+      text-align: center;
+    }
+  
+    @keyframes example {
+      0% {
+        left: 100%;
+        top: 0%;
+      }
+      100% {
+        left: 0%;
+        top: 0%;
+      }
+    }
+  
+    nav {
+      width: 100%;
+      background-color: #f0f0f0;
+      border-bottom: 1px solid #ccc;
+      margin-top: 12px;
+    }
+  
+    .flex-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 0;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+  
+    .flex-container > div > a {
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+  
+    .flex-container > div > a:hover {
+      background-color: #ddd;
+    }
+  
+    #selected {
+      border-top: 2px solid red;
+      border-bottom: 2px solid red;
+    }
+  
+    hr {
+      border-width: 0;
+      height: 1px;
+      width: 100%;
+      background-color: black;
+    }
+  
+    /* --- 신규/수정된 스타일 --- */
+  
+    .controls-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 10px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+  
+    .search-container {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .search-container input {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 250px;
+    }
+  
+    .search-container button {
+      padding: 8px 16px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+  
+    .search-container button:hover {
+      background-color: #0056b3;
+    }
+  
+    .sort-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+  
+    .sort-container label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+  
+    .movie-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* 중앙 정렬 유지 */
+      gap: 24px;
+      padding: 20px 0;
+    }
+  
+    .movie-card {
+      background-color: white;
+      width: 300px; /* 너비 조정 */
+      padding: 16px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      position: relative; /* **수정**: 줄거리의 position:absolute 기준점 */
+      overflow: hidden; /* 카드를 벗어나는 요소 숨김 */
+      transition: transform 0.3s ease;
+    }
+    
+    .movie-card:hover {
+      transform: translateY(-5px);
+    }
+  
+    .movie-card img {
+      width: 100%;
+      height: 450px; /* 높이 고정 */
+      object-fit: cover; /* 비율 유지하며 채우기 */
+      border-radius: 6px;
+    }
+    
+    .movie-card h2 {
+      margin: 12px 0 8px 0;
+      font-size: 18px;
+    }
+  
+    .movie-card p {
+      font-size: 14px;
+      margin: 4px 0;
+      color: #555;
+    }
+  
+    .overview {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 20px;
+      border-radius: 6px; /* 이미지와 맞춤 */
+      font-size: 15px;
+      z-index: 2;
+      overflow-y: auto; /* 내용이 길면 스크롤 */
+      text-align: left;
+    }
+  
+    .movie-card:hover .overview {
+      display: block;
+    }
+  
+    /* --- 기존 스타일 --- */
+    
+    .green_button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  
+    .red_button {
+      background-color: #f44336;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  
+    .input {
+      padding: 8px;
+      width: 60%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  
+    .form_wrap {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+  
+    .row {
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+    }
+  
+    .title_content {
+      width: 100px;
+      text-align: right;
+      margin-right: 10px;
+    }
+  }
+  
+  /* Responsive styles */
+  @media screen and (max-width: 480px) {
+    .flex-container, .controls-container, .movie-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    .movie-card {
+      width: 90%;
+    }
+  }
+  
+  @media screen and (min-width: 481px) and (max-width: 800px) {
+    .flex-container, .controls-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    .movie-card {
+      width: 80%;
+    }
+  }
+  
+  @media screen and (min-width: 801px) {
+    .flex-container {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }

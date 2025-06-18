@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+</head>
+<body>
+    <div class="container">
+        <header><h1>인프밍 영화 정보 사이트입니다.</h1></header>
+
+        <nav>
+          <div class="flex-container">
+            <div><a id="selected" href="/">메인페이지</a></div>
+            <div><a href="login">로그인</a></div>
+            <div><a href="signup">회원가입</a></div>
+          </div>
+        </nav>
+  
+        <hr />
+  
+        <div class="controls-container">
+          <div class="search-container">
+            <input type="text" id="search-input" placeholder="키워드를 입력하세요" />
+            <button id="search-button">Filter results</button>
+          </div>
+  
+          <div class="sort-container">
+            <strong>정렬 기준</strong>
+            <label><input type="radio" name="sort" value="rating_desc" checked /> 평점 내림차순</label>
+            <label><input type="radio" name="sort" value="rating_asc" /> 평점 오름차순</label>
+            <label><input type="radio" name="sort" value="release_desc" /> 개봉일 내림차순</label>
+            <label><input type="radio" name="sort" value="release_asc" /> 개봉일 오름차순</label>
+          </div>
+        </div>
+        <div id="movie-list" class="movie-container">
+            <% movies.forEach(function(movie) { %>
+                <a href="/movies/<%= movie.movie_id %>" class="movie-card-link"> <div class="movie-card">
+                        <img src="<%= movie.movie_image %>" alt="<%= movie.movie_title %>" />
+                        <h2><%= movie.movie_title %></h2>
+                        <p><strong>개봉일:</strong> <%= movie.movie_release_date %></p>
+                        <p><strong>평점:</strong> <%= movie.movie_rate %></p>
+                    </div>
+                </a>
+            <% }); %>
+        </div>
+    </div>
+
+    </body>
+</html>

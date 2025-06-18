@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>회원가입 페이지</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+  </head>
+  <body>
+    <!-- 기준선 -->
+    <div id="std"></div>
+
+    <!-- 전체 컨테이너 -->
+    <div class="container">
+      <!-- 헤더 -->
+      <header><h1>인프밍 영화 정보 사이트입니다.</h1></header>
+
+      <!-- 네비게이션 -->
+      <nav>
+        <div class="flex-container">
+          <div><a href="/">메인페이지</a></div>
+          <div><a href="login">로그인</a></div>
+          <div><a id="selected" href="signup">회원가입</a></div>
+        </div>
+      </nav>
+
+      <br />
+      <hr />
+      <br />
+
+      <!-- 회원가입 폼 -->
+      <div class="form_wrap">
+        <form method="post">
+          <!-- 이름 -->
+          <div class="row">
+            <span class="title_content">이름 :</span>
+            <input class="input" type="text" name="name" placeholder="홍길동" autocomplete="on" required />
+          </div>
+
+          <!-- 생일 -->
+          <div class="row">
+            <span class="title_content">생일 :</span>
+            <input class="input" type="date" name="birthday" required />
+          </div>
+
+          <!-- 성별 -->
+          <div class="row" style="text-align: left;">
+            <span class="title_content">성별 :</span>
+            <label class="input"><input type="radio" name="gender" value="Male" required />남성</label>
+            <label class="input"><input type="radio" name="gender" value="Female" />여성</label>
+          </div>
+
+          <!-- 학년 -->
+          <div class="row">
+            <span class="title_content">학년 :</span>
+            <input class="input" type="number" name="grade" min="1" step="1" required />
+          </div>
+
+          <!-- 아이디 -->
+          <div class="row">
+            <span class="title_content">아이디 :</span>
+            <input class="input" type="text" name="id" autocomplete="on" required />
+          </div>
+
+          <!-- 비밀번호 -->
+          <div class="row">
+            <span class="title_content">비밀번호 :</span>
+            <input class="input" type="password" name="pw" autocomplete="off" required />
+          </div>
+
+          <!-- 이메일 -->
+          <div class="row">
+            <span class="title_content">이메일 :</span>
+            <input class="input" type="email" name="email" required />
+          </div>
+
+          <!-- 보안 질문 -->
+          <div class="row">
+            <span class="title_content">보안 질문 :</span>
+            <select class="input" name="questions" required>
+              <option value="">질문을 선택하세요</option>
+              <option value="자녀 이름은 무엇인가요?">자녀 이름은 무엇인가요?</option>
+              <option value="몇 년도에 대학에 입학했나요?">몇 년도에 대학에 입학했나요?</option>
+              <option value="자녀의 별명은 무엇인가요?">자녀의 별명은 무엇인가요?</option>
+            </select>
+          </div>
+
+          <!-- 답변 -->
+          <div class="row">
+            <span class="title_content">답변 :</span>
+            <input class="input" type="text" name="answer" autocomplete="off" required />
+          </div>
+
+          <br />
+
+          <!-- 버튼 -->
+          <div class="row">
+            <button class="green_button" type="submit">Signup</button>
+            <button class="red_button" type="reset">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
