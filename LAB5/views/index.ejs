@@ -10,8 +10,8 @@
         <nav>
           <div class="flex-container">
             <div><a id="selected" href="/">메인페이지</a></div>
-            <div><a href="login">로그인</a></div>
-            <div><a href="signup">회원가입</a></div>
+            <div><a href="/login">로그인</a></div>
+            <div><a href="/signup">회원가입</a></div>
           </div>
         </nav>
   
@@ -43,6 +43,38 @@
             <% }); %>
         </div>
     </div>
+    <script>
+        // 필터와 정렬을 적용하여 페이지를 새로고침하는 함수
+        function applyFiltersAndSort() {
+            const keyword = document.getElementById('search-input').value;
+            const sortValue = document.querySelector('input[name="sort"]:checked').value;
+          
+            // 검색어와 정렬 기준을 URL 파라미터로 만들어 페이지 이동
+            window.location.href = `/?keyword=${encodeURIComponent(keyword)}&sort=${sortValue}`;
+        }
+  
+        // 검색 버튼 클릭 시 함수 실행
+        document.getElementById('search-button').addEventListener('click', applyFiltersAndSort);
+  
+        // 정렬 라디오 버튼 변경 시 함수 실행
+        document.querySelectorAll('input[name="sort"]').forEach(radio => {
+            radio.addEventListener('change', applyFiltersAndSort);
+        });
+  
+        // 페이지 로드 후, URL 파라미터를 읽어 검색창과 라디오 버튼에 현재 값 반영
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const keyword = urlParams.get('keyword');
+            const sort = urlParams.get('sort');
+  
+            if (keyword) {
+                document.getElementById('search-input').value = keyword;
+            }
+            if (sort) {
+                document.querySelector(`input[name="sort"][value="${sort}"]`).checked = true;
+            }
+        });
+    </script>
 
     </body>
 </html>

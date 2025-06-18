@@ -1,5 +1,3 @@
-// index.js
-
 const express = require('express');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
@@ -8,7 +6,6 @@ const fs = require('fs');
 const app = express();
 const port = 3000;
 
-// 데이터베이스 연결
 const db = new sqlite3.Database('product.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
         console.error(err.message);
@@ -16,47 +13,52 @@ const db = new sqlite3.Database('product.db', sqlite3.OPEN_READWRITE, (err) => {
     console.log('Connected to the product.db database.');
 });
 
-// EJS를 뷰 엔진으로 설정
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// 정적 파일(css, js, images) 제공 설정
 app.use(express.static(path.join(__dirname, 'public')));
-// POST 요청의 body를 파싱하기 위한 미들웨어
 app.use(express.urlencoded({ extended: true }));
 
-
-// 라우팅 (Routing)
-
-// 1. 메인 페이지: 영화 목록 표시 
 app.get('/', (req, res) => {
-    // 키워드 검색 및 필터링 쿼리 
     const keyword = req.query.keyword || '';
-    const category = req.query.category || 'movie_title'; // 기본 필터: 제목
-    
-    // SQL 쿼리 작성 (키워드가 포함된 영화 검색)
-    const sql = `SELECT * FROM movies WHERE ${category} LIKE ? ORDER BY movie_rate DESC`;
+    const sortOption = req.query.sort || 'rating_desc'; 
+
+    let orderByClause = '';
+    switch (sortOption) {
+        case 'rating_asc':
+            orderByClause = 'ORDER BY movie_rate ASC';
+            break;
+        case 'release_desc':
+            orderByClause = 'ORDER BY movie_release_date DESC';
+            break;
+        case 'release_asc':
+            orderByClause = 'ORDER BY movie_release_date ASC';
+            break;
+        case 'rating_desc':
+        default:
+            orderByClause = 'ORDER BY movie_rate DESC';
+            break;
+    }
+
+    const sql = `SELECT * FROM movies WHERE movie_title LIKE ? ${orderByClause}`;
     const params = [`%${keyword}%`];
 
     db.all(sql, params, (err, rows) => {
         if (err) {
-            throw err;
+            console.error(err.message);
+            res.status(500).send("Internal Server Error");
+            return;
         }
-        res.render('index', { movies: rows, keyword: keyword, category: category });
+        res.render('index', { movies: rows, keyword: keyword, sortOption: sortOption });
     });
 });
 
-// 2. 로그인 페이지 
 app.get('/login', (req, res) => {
     res.render('login');
 });
-
-// 3. 회원가입 페이지 
 app.get('/signup', (req, res) => {
     res.render('signup');
 });
-
-// 4. 영화 상세 정보 페이지 
 app.get('/movies/:movie_id', (req, res) => {
     const movieId = req.params.movie_id;
     const sql = `SELECT * FROM movies WHERE movie_id = ?`;
@@ -69,8 +71,6 @@ app.get('/movies/:movie_id', (req, res) => {
         if (!movie) {
             return res.status(404).send("Movie not found");
         }
-
-        // 후기 정보 불러오기 (File I/O) 
         fs.readFile('comment.json', 'utf8', (err, data) => {
             if (err) {
                  res.status(500).send("Error reading comments");
@@ -83,38 +83,60 @@ app.get('/movies/:movie_id', (req, res) => {
     });
 });
 
-// 5. 새로운 후기 추가 처리 
+
 app.post('/movies/:movie_id/comment', (req, res) => {
     const movieId = req.params.movie_id;
     const newComment = req.body.comment;
+    
+    console.log('--- 후기 등록 요청 시작 ---');
+    console.log('영화 ID:', movieId);
+    console.log('새로운 후기 내용:', newComment);
 
-    if (!newComment) {
+    if (!newComment || newComment.trim() === '') {
+        console.log('후기 내용이 비어있어 리다이렉트합니다.');
         return res.redirect(`/movies/${movieId}`);
     }
 
-    fs.readFile('comment.json', 'utf8', (err, data) => {
+    const commentFilePath = path.join(__dirname, 'comment.json');
+    console.log('comment.json 파일 경로:', commentFilePath);
+
+    fs.readFile(commentFilePath, 'utf8', (err, data) => {
         if (err) {
+            console.error('파일 읽기 실패:', err);
             return res.status(500).send("Error reading comments file.");
         }
+        console.log('1. 파일 읽기 성공.');
 
-        const allComments = JSON.parse(data);
+        let allComments;
+        try {
+            allComments = JSON.parse(data);
+            console.log('2. JSON 파싱 성공.');
+        } catch (parseErr) {
+            console.error('JSON 파싱 실패:', parseErr);
+            return res.status(500).send("Failed to parse comment.json. The file might be corrupted.");
+        }
+
         if (!allComments[movieId]) {
             allComments[movieId] = [];
         }
         allComments[movieId].push(newComment);
+        console.log('3. 새로운 후기 메모리에 추가 완료.');
 
-        fs.writeFile('comment.json', JSON.stringify(allComments, null, 2), (err) => {
+        fs.writeFile(commentFilePath, JSON.stringify(allComments, null, 2), (err) => {
             if (err) {
+                console.error('파일 쓰기 실패:', err);
                 return res.status(500).send("Error writing comments file.");
             }
+            console.log('4. 파일 쓰기 성공! comment.json 업데이트 완료.');
+            
             // 후기 추가 후 상세 페이지로 리다이렉트
+            console.log('5. 상세 페이지로 리다이렉트합니다.');
+            console.log('--- 후기 등록 요청 종료 ---');
             res.redirect(`/movies/${movieId}`);
         });
     });
 });
 
-
-// 서버 실행
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });

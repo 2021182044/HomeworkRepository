@@ -1,274 +1,433 @@
 @media all {
-    html {
-      max-width: 1020px;
-      margin: 0 auto; /* html 태그 자체를 중앙 정렬 */
+  html {
+    max-width: 1020px;
+    margin: 0 auto;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  #std {
+    width: 1020px;
+    height: 2px;
+    background-color: black;
+    margin: 0 auto;
+  }
+
+  .container {
+    width: 1020px;
+    margin: 0 auto;
+  }
+
+  header {
+    position: relative;
+    animation-name: example;
+    animation-duration: 2s;
+    text-align: center;
+  }
+
+  @keyframes example {
+    0% {
+      left: 100%;
+      top: 0%;
     }
-  
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
+    100% {
+      left: 0%;
+      top: 0%;
     }
+  }
+
+  nav {
+    width: 100%;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+    margin-top: 12px;
+  }
+
+  .flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .flex-container > div > a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+
+  .flex-container > div > a:hover {
+    background-color: #ddd;
+  }
+
+  #selected {
+    border-top: 2px solid red;
+    border-bottom: 2px solid red;
+  }
+
+  hr {
+    border-width: 0;
+    height: 1px;
+    width: 100%;
+    background-color: black;
+  }
+
+  /* --- 신규/수정된 스타일 --- */
+
+  .controls-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .search-container {
+    display: flex;
+    gap: 8px;
+  }
   
-    #std {
-      width: 1020px;
-      height: 2px;
-      background-color: black;
-      margin: 0 auto;
-    }
+  .search-container input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 250px;
+  }
+
+  .search-container button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .search-container button:hover {
+    background-color: #0056b3;
+  }
+
+  .sort-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .sort-container label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .movie-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 24px;
+    padding: 20px 0;
+  }
+
+  .movie-card {
+    background-color: white;
+    width: 300px; 
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative; 
+    overflow: hidden; 
+    transition: transform 0.3s ease;
+  }
   
-    .container {
-      width: 1020px;
-      margin: 0 auto;
-    }
+  .movie-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .movie-card img {
+    width: 100%;
+    object-fit: contain;
+    height: auto;
+    border-radius: 6px;
+  }
   
-    header {
-      position: relative;
-      animation-name: example;
-      animation-duration: 2s;
-      text-align: center;
-    }
+  .movie-card h2 {
+    margin: 12px 0 8px 0;
+    font-size: 18px;
+  }
+
+  .movie-card p {
+    font-size: 14px;
+    margin: 4px 0;
+    color: #555;
+  }
+
+  .overview {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 20px;
+    border-radius: 6px; /* 이미지와 맞춤 */
+    font-size: 15px;
+    z-index: 2;
+    overflow-y: auto; /* 내용이 길면 스크롤 */
+    text-align: left;
+  }
+
+  .movie-card:hover .overview {
+    display: block;
+  }
+
+  /* --- 기존 스타일 --- */
   
-    @keyframes example {
-      0% {
-        left: 100%;
-        top: 0%;
-      }
-      100% {
-        left: 0%;
-        top: 0%;
-      }
-    }
+  .green_button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .red_button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .input {
+    padding: 8px;
+    width: 60%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .form_wrap {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .row {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+  }
+
+  .title_content {
+    width: 100px;
+    text-align: right;
+    margin-right: 10px;
+  }
+
+  .detail-poster-box {
+    width: 250px; 
+    flex-shrink: 0; 
+  }
   
-    nav {
-      width: 100%;
-      background-color: #f0f0f0;
-      border-bottom: 1px solid #ccc;
-      margin-top: 12px;
-    }
-  
-    .flex-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px 0;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-  
-    .flex-container > div > a {
-      color: black;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 8px 16px;
-      border-radius: 4px;
-      transition: background-color 0.3s;
-    }
-  
-    .flex-container > div > a:hover {
-      background-color: #ddd;
-    }
-  
-    #selected {
-      border-top: 2px solid red;
-      border-bottom: 2px solid red;
-    }
-  
-    hr {
-      border-width: 0;
-      height: 1px;
-      width: 100%;
-      background-color: black;
-    }
-  
-    /* --- 신규/수정된 스타일 --- */
-  
-    .controls-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 10px;
-      background-color: #f8f9fa;
+  .detail-poster-box img {
+      width: 100%; 
+      height: auto; 
       border-radius: 8px;
-      margin: 20px 0;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-  
-    .search-container {
-      display: flex;
-      gap: 8px;
-    }
-    
-    .search-container input {
-      padding: 8px 12px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      width: 250px;
-    }
-  
-    .search-container button {
-      padding: 8px 16px;
-      border: none;
-      background-color: #007bff;
-      color: white;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-  
-    .search-container button:hover {
-      background-color: #0056b3;
-    }
-  
-    .sort-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-  
-    .sort-container label {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-  
-    .movie-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center; /* 중앙 정렬 유지 */
-      gap: 24px;
-      padding: 20px 0;
-    }
-  
-    .movie-card {
-      background-color: white;
-      width: 300px; /* 너비 조정 */
-      padding: 16px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      position: relative; /* **수정**: 줄거리의 position:absolute 기준점 */
-      overflow: hidden; /* 카드를 벗어나는 요소 숨김 */
-      transition: transform 0.3s ease;
-    }
-    
-    .movie-card:hover {
-      transform: translateY(-5px);
-    }
-  
-    .movie-card img {
-      width: 100%;
-      height: 450px; /* 높이 고정 */
-      object-fit: cover; /* 비율 유지하며 채우기 */
-      border-radius: 6px;
-    }
-    
-    .movie-card h2 {
-      margin: 12px 0 8px 0;
-      font-size: 18px;
-    }
-  
-    .movie-card p {
-      font-size: 14px;
-      margin: 4px 0;
-      color: #555;
-    }
-  
-    .overview {
-      display: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.85);
-      color: white;
-      padding: 20px;
-      border-radius: 6px; /* 이미지와 맞춤 */
-      font-size: 15px;
-      z-index: 2;
-      overflow-y: auto; /* 내용이 길면 스크롤 */
-      text-align: left;
-    }
-  
-    .movie-card:hover .overview {
-      display: block;
-    }
-  
-    /* --- 기존 스타일 --- */
-    
-    .green_button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  
-    .red_button {
-      background-color: #f44336;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  
-    .input {
-      padding: 8px;
-      width: 60%;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-  
-    .form_wrap {
-      display: flex;
-      justify-content: center;
-      padding: 20px;
-    }
-  
-    .row {
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-    }
-  
-    .title_content {
-      width: 100px;
-      text-align: right;
-      margin-right: 10px;
-    }
+      display: block; 
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   }
-  
-  /* Responsive styles */
-  @media screen and (max-width: 480px) {
-    .flex-container, .controls-container, .movie-container {
-      flex-direction: column;
-      align-items: center;
-    }
-    .movie-card {
-      width: 90%;
-    }
+
+  .movie-detail-card {
+    background-color: #fff;
+    padding: 20px 30px;
+    margin-top: 20px;
   }
-  
-  @media screen and (min-width: 481px) and (max-width: 800px) {
-    .flex-container, .controls-container {
-      flex-direction: column;
-      align-items: center;
-    }
-    .movie-card {
-      width: 80%;
-    }
+
+
+  .detail-main-info {
+    display: flex;
+    gap: 30px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #eee; 
   }
-  
-  @media screen and (min-width: 801px) {
-    .flex-container {
-      flex-direction: row;
-      justify-content: center;
-    }
+
+ 
+  .info-container {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
   }
+
+  .info-container h1 {
+    margin: 0 0 15px 0;
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+
+  .info-container .info-item {
+    display: flex;
+    align-items: flex-start; 
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 4px 0;
+    color: #333;
+  }
+
+  .info-container .info-icon {
+    margin-right: 10px; 
+    font-size: 1.2em;
+  }
+
+  .info-container .info-item.overview {
+    flex-direction: column; 
+    margin-top: 15px;
+  }
+
+  .info-container .info-item.overview strong {
+    margin-bottom: 5px; 
+  }
+
+
+
+  .overview-container {
+    margin-top: 20px;
+  }
+
+
+  .overview-title {
+    display: flex;
+    align-items: center; 
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 10px; 
+  }
+
+
+  .overview-title .info-icon {
+    margin-right: 8px;
+    font-size: 1.2em;
+  }
+
+
+  .overview-text {
+    margin: 0;
+    line-height: 1.7;
+    color: #555;
+    text-align: justify;
+  }
+
+
+  .review-section {
+    padding: 25px 0;
+  }
+
+  .review-section h2 {
+    font-size: 1.5em;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #333;
+    margin-bottom: 20px;
+  }
+
+  #comment-section .comment, #comment-section .no-comment {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0; 
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  #comment-section .no-comment {
+    color: #888;
+  }
+
+
+  .comment-form {
+    margin-top: 20px;
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+  }
+
+  .comment-form textarea {
+    flex-grow: 1; 
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 16px;
+    resize: none;
+    transition: border-color 0.3s;
+  }
+
+  .comment-form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  .comment-form button {
+    flex-shrink: 0; 
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .comment-form button:hover {
+    background-color: #0056b3;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  .flex-container, .controls-container, .movie-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .movie-card {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 800px) {
+  .flex-container, .controls-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .movie-card {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 801px) {
+  .flex-container {
+    flex-direction: row;
+    justify-content: center;
+  }
+}

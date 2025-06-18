@@ -4,40 +4,73 @@
     <title><%= movie.movie_title %> 상세 정보</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
 </head>
-<body>
-    <div class="container">
-        <header><h1>인프밍 영화 정보 사이트입니다.</h1></header>
+    <body>
+        <div class="container">
+            <header><h1>인프밍 영화 정보 사이트입니다.</h1></header>
 
-        <nav>
-          <div class="flex-container">
-            <div><a id="selected" href="/">메인페이지</a></div>
-            <div><a href="login">로그인</a></div>
-            <div><a href="signup">회원가입</a></div>
-          </div>
-        </nav>
-  
-        <hr />
-        
-        <h1><%= movie.movie_title %></h1>
-        <p><strong>영화 ID:</strong> <%= movie.movie_id %></p>
-        <img src="<%= movie.movie_image %>" alt="<%= movie.movie_title %>" style="width: 300px;">
-        <p><strong>개봉일:</strong> <%= movie.movie_release_date %></p>
-        <p><strong>평점:</strong> <%= movie.movie_rate %></p>
-        <p><strong>줄거리:</strong> <%= movie.movie_overview %></p>
+            <nav>
+            <div class="flex-container">
+                <div><a id="selected" href="/">메인페이지</a></div>
+                <div><a href="/login">로그인</a></div>
+                <div><a href="/signup">회원가입</a></div>
+            </div>
+            </nav>
+    
+            <hr />
 
-        <hr>
+            <div class="movie-detail-card">
+                
+                <div class="detail-main-info" style="display: flex; gap: 20px; align-items: flex-start;">
+                    <div class="detail-poster-box">
+                        <img src="<%= movie.movie_image %>" alt="<%= movie.movie_title %>">
+                    </div>               
+                    <div class="info-container">
+                        <p class="info-item">
+                            <span class="info-icon">🆔</span>
+                            <strong>영화 ID:</strong> <%= movie.movie_id %>
+                        </p>
+                        <h1><%= movie.movie_title %></h1>
+                        <p class="info-item">
+                            <span class="info-icon">🗓️</span>
+                            <strong>개봉일:</strong> <%= movie.movie_release_date %>
+                        </p>
+                        <p class="info-item">
+                            <span class="info-icon">⭐</span>
+                            <strong>평점:</strong> <%= movie.movie_rate %> / 10
+                        </p>
+                        <div class="overview-container">
+                            <div class="info-item">
+                                <span class="info-icon">📝</span>
+                                <strong>줄거리</strong>
+                            </div>
+                            <p class="overview-text">
+                                <%= movie.movie_overview %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-        <h2>영화 후기</h2>
-        <div id="comment-section">
-            <% comments.forEach(function(comment) { %>
-                <p class="comment"><%= comment %></p>
-            <% }); %>
+                <hr class="section-divider">
+
+                <div class="review-section">
+                    <h2>영화 후기</h2>
+                    <div id="comment-section">
+                        <% if (comments && comments.length > 0) { %>
+                            <% comments.forEach(function(comment) { %>
+                                <p class="comment"><%= comment %></p>
+                            <% }); %>
+                        <% } else { %>
+                            <p class="no-comment">아직 작성된 후기가 없습니다.</p>
+                        <% } %>
+                    </div>
+                    
+                    <form class="comment-form" action="/movies/<%= movie.movie_id %>/comment" method="POST">
+                        <textarea name="comment" placeholder="후기를 작성하세요" required></textarea>
+                        <button type="submit">등록하기!</button>
+                    </form>
+                </div>
+
+            </div>
         </div>
-        
-        <form action="/movies/<%= movie.movie_id %>/comment" method="POST">
-            <textarea name="comment" placeholder="후기를 작성하세요" required></textarea>
-            <button type="submit">등록하기!</button>
-        </form>
-    </div>
-</body>
+    </body>
 </html>

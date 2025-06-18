@@ -1,8 +1,6 @@
-// database_setup.js
-
 const sqlite3 = require('sqlite3').verbose();
 
-// 20개의 영화 데이터 (LAB 4의 product.json 데이터 활용)
+
 const moviesData = [
     { title: "Toy Story", release_date: "1995-10-30", vote_average: 7.7, image: "https://i.ebayimg.com/00/s/MTYwMFgxMDgy/z/MewAAOSwE0ZaqT7H/$_57.JPG?set_id=8800005007", overview: "Led by Woody, Andy's toys live happily in his room until Andy's birthday brings Buzz Lightyear onto the scene. Afraid of losing his place in Andy's heart, Woody plots against Buzz. But when circumstances separate Buzz and Woody from their owner, the duo eventually learns to put aside their differences." },
     { title: "Jumanji", release_date: "1995-12-15", vote_average: 6.9, image: "https://m.media-amazon.com/images/M/MV5BYTFkMjFmODgtYzRiZi00NmQwLTliZWMtMzRhMWQ5ZmY3ZDExXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", overview: "When two kids find and play a magical board game, they release a man trapped for decades in it and a host of dangers that can only be stopped by finishing the game." },
@@ -26,7 +24,7 @@ const moviesData = [
     { title: "Money Train", release_date: "1995-11-21", vote_average: 5.4, image: "https://m.media-amazon.com/images/M/MV5BZGIzODJmMGYtMzY2My00ZGJkLTg1YzMtNmY2ZTVlYmI5YzYyXkEyXkFqcGc@._V1_.jpg", overview: "A vengeful New York transit cop decides to steal a trainload of subway fares. His foster brother, a fellow cop, tries to protect him." }
 ];
 
-// DB 파일 생성 또는 연결
+
 const db = new sqlite3.Database('./product.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
     if (err) {
         console.error(err.message);
@@ -35,15 +33,12 @@ const db = new sqlite3.Database('./product.db', sqlite3.OPEN_READWRITE | sqlite3
 });
 
 db.serialize(() => {
-    // 기존 테이블이 있다면 삭제
     db.run(`DROP TABLE IF EXISTS movies`, (err) => {
         if (err) {
             return console.error(err.message);
         }
         console.log("Table 'movies' is dropped.");
     });
-
-    // movies 테이블 생성 
     const createTableSql = `
         CREATE TABLE movies (
             movie_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -61,7 +56,6 @@ db.serialize(() => {
         console.log("Table 'movies' created successfully.");
     });
 
-    // 데이터 삽입
     const insertSql = `INSERT INTO movies (movie_title, movie_release_date, movie_rate, movie_image, movie_overview) VALUES (?, ?, ?, ?, ?)`;
     moviesData.forEach((movie) => {
         db.run(insertSql, [movie.title, movie.release_date, movie.vote_average, movie.image, movie.overview], (err) => {
@@ -72,7 +66,6 @@ db.serialize(() => {
     });
     console.log(`${moviesData.length} records inserted into 'movies' table.`);
 
-    // DB 연결 종료
     db.close((err) => {
         if (err) {
             console.error(err.message);
